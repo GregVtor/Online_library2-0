@@ -27,9 +27,9 @@
         </div>
         <div id="Reg_f" style="align-items: center; border: #202020 solid 1px; border-radius: 17px 17px 0 0; width: 88.3%; height: 57%; position: absolute; top: 24.5%; left: 5.83%">
         </div>
-        <button id="But" style="text-align: center; top: 76.9%; left: 5.83%; width: 88.5%; height: 13.1%; position: absolute; border: #0076E2 solid 1px; border-radius: 0 0 17px 17px; background-color: #0076E2">
+        <div id="But" style="text-align: center; top: 76.9%; left: 5.83%; width: 88.3%; height: 13.1%; position: absolute; border: #0076E2 solid 1px; border-radius: 0 0 17px 17px; background-color: #0076E2">
             <div style="font-family: 'Ubuntu Light', sans-serif; font-size: 48px; color: white; letter-spacing: -5px">ВОЙТИ</div>
-        </button>
+        </div>
     </div>
     <script>
         let reg_or_log = 1
@@ -42,7 +42,7 @@
         let Reg_f = document.getElementById("Reg_f")
         let Main_div = document.getElementById("Main_div");
         let But = document.getElementById("But");
-        go_log()
+        go_log();
 
 
         function hide_all() {
@@ -89,14 +89,19 @@
                 let json = JSON.stringify(ret);
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST", "/login");
+                xhr.responseType = 'json'
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send(json)
+                xhr.onload = function () {
+                    let otv = xhr.response
+                    let lol = otv['mes']
+                    console.log(lol)
+                }
             }
             else {
 
             }
-        }
-
+        };
     </script>
   </body>
 </html>

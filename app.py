@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
+from json import dumps
 
 from db_con import db_init
 
@@ -18,7 +19,9 @@ def start_page():
 @app.route('/login', methods=['POST'])
 def login_handler():
     print(request.json)
-    return ''
+    res = make_response(dumps({'mes': 'bad log'}), 400)
+    res.headers['Content-Type'] = 'application/json'
+    return res
 
 
 @app.route('/register', methods=['POST'])
