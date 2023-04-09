@@ -1,5 +1,6 @@
+import hashlib
+
 from flask import Flask, render_template, request, make_response
-from json import dumps
 
 from db_con import db_init
 
@@ -18,10 +19,28 @@ def start_page():
 
 @app.route('/login', methods=['POST'])
 def login_handler():
-    print(request.json)
-    res = make_response(dumps({'mes': 'bad log'}), 400)
-    res.headers['Content-Type'] = 'application/json'
-    return res
+    if request.json['reqwest_type'] != 'Login':
+        res = make_response('invalid request type', 400)
+        res.headers['Content-Type'] = 'application/text'
+        return res
+
+    email = request.json['email']
+    password = request.json['password']
+
+    if not email or not password or not db.session.query(User).filter_by(
+            email=email).first():
+        res = make_response('invalid login data', 400)
+        res.headers['Content-Type'] = 'application/text'
+        return res
+
+    hash = hashlib.sha256(bytes(password, encoding='utf-8')).hexdigest()
+
+    if db.session.query(User).filter_by(email=email).first().password != hash:
+        res = make_response('invalid login data', 400)
+        res.headers['Content-Type'] = 'application/text'
+        return res
+
+    return '', 200
 
 
 @app.route('/register', methods=['POST'])
