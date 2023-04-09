@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @font-face {
+            font-family: 'Oswald Light';
+            src: url("../static/fonts/Oswald-Light.ttf");
+        }
+        @font-face {
+            font-family: 'Ubuntu Light';
+            src: url("../static/fonts/Ubuntu-Light.ttf");
+        }
+    </style>
+  </head>
+  <body>
+    <img src="../static/image/logo.svg" width="23.6%" style="top: 5%; left: 3%; position: absolute;">
+    <div id="Main_div" style="top: 24.3%; left: 23%; position: absolute; width: 54%; height: 68%; border: #202020 solid 1px; border-radius: 17px">
+        <div id="Log_v" style="font-size: 48px; font-family: 'Oswald Light', sans-serif; left: 6.8%; top: 10%; position: absolute; color: #0076E2">Вход</div>
+        <div id="Log_r" onclick="go_reg()" style="font-size: 32px; font-family: 'Oswald Light', sans-serif; right: 7.2%; top: 13.7%; position: absolute; color: #202020">Регистрация</div>
+        <div id="Reg_v" onclick="go_log()" style="font-size: 32px; font-family: 'Oswald Light', sans-serif; left: 6.8%; top: 10.9%; position: absolute; color: #202020">Вход</div>
+        <div id="Reg_r" style="font-size: 48px; font-family: 'Oswald Light', sans-serif; right: 5.7%; top: 7.5%; position: absolute; color: #0076E2">Регистрация</div>
+        <div id="Log_f" style="align-items: center; border: #202020 solid 1px; border-radius: 17px 17px 0 0; width: 88.3%; height: 47.9%; position: absolute; top: 24.5%; left: 5.83%">
+            <input id="Email_l" placeholder="E-mail" type="email" name="login" style="padding-left: 10px; border: #202020 solid 1px; border-radius: 12px; width: 93.8%; background-color: #F1F1F1; color: #7C7C7C; height: 24.4%; font-size: 32px; font-family: 'Ubuntu Light', sans-serif; left: 0; right: 0; margin-left: auto; margin-right: auto; top: 18.3%; position: absolute">
+            <input id="Pas_l" placeholder="Пароль" type="password" name="password" style="padding-left: 10px; border: #202020 solid 1px; border-radius: 12px; width: 93.8%; background-color: #F1F1F1; color: #7C7C7C; height: 24.4%; font-size: 32px; font-family: 'Ubuntu Light', sans-serif; left: 0; right: 0; margin-left: auto; margin-right: auto; bottom: 18.3%; position: absolute">
+        </div>
+        <div id="Reg_f" style="align-items: center; border: #202020 solid 1px; border-radius: 17px 17px 0 0; width: 88.3%; height: 57%; position: absolute; top: 24.5%; left: 5.83%">
+        </div>
+        <button id="But" style="text-align: center; top: 76.9%; left: 5.83%; width: 88.5%; height: 13.1%; position: absolute; border: #0076E2 solid 1px; border-radius: 0 0 17px 17px; background-color: #0076E2">
+            <div style="font-family: 'Ubuntu Light', sans-serif; font-size: 48px; color: white; letter-spacing: -5px">ВОЙТИ</div>
+        </button>
+    </div>
+    <script>
+        let reg_or_log = 1
+        let Email_l = document.getElementById("Email_l")
+        let Log_f = document.getElementById("Log_f")
+        let Log_v = document.getElementById("Log_v");
+        let Log_r = document.getElementById("Log_r");
+        let Reg_v = document.getElementById("Reg_v");
+        let Reg_r = document.getElementById("Reg_r");
+        let Reg_f = document.getElementById("Reg_f")
+        let Main_div = document.getElementById("Main_div");
+        let But = document.getElementById("But");
+        go_log()
+
+
+        function hide_all() {
+            Log_r.hidden = true;
+            Log_v.hidden = true;
+            Reg_r.hidden = true;
+            Reg_v.hidden = true;
+            Log_f.hidden = true;
+            Reg_f.hidden = true;
+        }
+
+
+        function go_reg() {
+            hide_all()
+            Reg_r.hidden = false;
+            Reg_v.hidden = false;
+            Reg_f.hidden = false;
+            Main_div.style.height = "68.1%";
+            reg_or_log = 0;
+            But.style.top = "76.9%";
+            But.style.height = "13.1%";
+        }
+
+
+        function go_log() {
+            hide_all()
+            Log_r.hidden = false;
+            Log_v.hidden = false;
+            Log_f.hidden = false;
+            Main_div.style.height = "56%"
+            reg_or_log = 1;
+            But.style.top = "72.4%";
+            But.style.height = "11.1%";
+        }
+
+
+        But.onclick = async function () {
+            if (reg_or_log === 1) {
+                let ret = {
+                    reqwest_type: 'Login',
+                    email: document.getElementById("Email_l").value,
+                    password: document.getElementById("Pas_l").value
+                };
+                let json = JSON.stringify(ret);
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "/login");
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(json)
+            }
+            else {
+
+            }
+        }
+
+    </script>
+  </body>
+</html>
