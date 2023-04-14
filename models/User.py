@@ -20,6 +20,20 @@ class User(db.Model):
         self.shurname = shurname
         self.enabled = enabled
 
+    @staticmethod
+    def is_authenticated():
+        return True
+
+    def is_enabled(self):
+        return self.enabled
+
+    @staticmethod
+    def is_anonymous():
+        return False
+
+    def get_is(self):
+        return self.id
+
 
 class Student(User):
     __tablename__ = 'student'

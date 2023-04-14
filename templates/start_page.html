@@ -115,11 +115,13 @@
                 }
             }
             else {
+                if (document.getElementById('Pas_r').value !== document.getElementById('Pas_r_2').value) {
+                    return NaN
+                }
                 let ret = {
                     request_type: 'Register',
                     email: document.getElementById('Email_r').value,
                     password : document.getElementById('Pas_r').value,
-                    password_2: document.getElementById('Pas_r_2').value,
                     name: document.getElementById('Name').value,
                     surname: document.getElementById('Surname').value,
                     class: document.getElementById('Class').value
@@ -137,6 +139,14 @@
                 }
             }
         };
+
+        But.onmouseover = function (){
+            But.style.backgroundColor = '#0065c0';
+        }
+
+        But.onmouseout = function() {
+            But.style.backgroundColor = '#0076E2FF'
+        }
     </script>
   </body>
 </html>
