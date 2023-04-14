@@ -1,7 +1,7 @@
 import hashlib
 
 from flask import Flask, render_template, request, make_response
-from flask_login import LoginManager
+from flask_login import LoginManager, login_user
 from db_con import db_init
 
 app = Flask(__name__)
@@ -49,6 +49,8 @@ def login_handler():
         res = make_response('invalid login data', 400)
         res.headers['Content-Type'] = 'application/text'
         return res
+
+    load_user(db.session.query(User).filter_by(email=email).first().id)
 
     return '', 200
 
