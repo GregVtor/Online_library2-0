@@ -55,6 +55,16 @@ def login_handler():
 
 @app.route('/register', methods=['POST'])
 def register_handler():
+    if request.json['request_type'] != 'Register':
+        res = make_response('invalid request type', 400)
+        res.headers['Content-Type'] = 'application/text'
+        return res
+
+    email = request.json['email']
+    password = request.json['password']
+    name = request.json['name']
+    surname = request.json['surname']
+    us_class = request.json['class']
     return ''
 
 
