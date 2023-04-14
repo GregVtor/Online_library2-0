@@ -98,7 +98,7 @@
         But.onclick = async function () {
             if (reg_or_log === 1) {
                 let ret = {
-                    reqwest_type: 'Login',
+                    request_type: 'Login',
                     email: document.getElementById("Email_l").value,
                     password: document.getElementById("Pas_l").value
                 };
@@ -115,7 +115,26 @@
                 }
             }
             else {
-
+                let ret = {
+                    request_type: 'Register',
+                    email: document.getElementById('Email_r').value,
+                    password : document.getElementById('Reg_r').value,
+                    password_2: document.getElementById('Reg_r_2').value,
+                    name: document.getElementById('Name').value,
+                    surname: document.getElementById('Surname').value,
+                    class: document.getElementById('Class').value
+                };
+                let json = JSON.stringify(ret);
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "/register")
+                xhr.responseType = 'json'
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(json)
+                xhr.onload = function () {
+                    let otv = xhr.response
+                    let lol = otv['mes']
+                    console.log(lol)
+                }
             }
         };
     </script>
