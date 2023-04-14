@@ -23,14 +23,14 @@ class User(db.Model):
     def is_authenticated():
         return True
 
-    def is_enabled(self):
+    def is_active(self):
         return self.enabled
 
     @staticmethod
     def is_anonymous():
         return False
 
-    def get_is(self):
+    def get_id(self):
         return self.id
 
 
