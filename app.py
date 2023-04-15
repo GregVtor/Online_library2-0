@@ -67,10 +67,21 @@ def register_handler():
         return res
 
     email = request.json['email']
-    password = request.json['password']
+
+    if db.session.query(User).filter_by(email=email).first():
+        res = make_response('user with this email already exists', 400)
+        res.headers['Content-Type'] = 'application/text'
+        return res
+
+    password = hashlib.sha256(bytes(request.json['password'],
+                                    encoding='utf-8')).hexdigest()
     name = request.json['name']
     surname = request.json['surname']
     us_class = request.json['class']
+    new_user = Student(email, password, name, surname, us_class)
+    db_sess = db.session.create_session()
+    db_sess.add(new_user)
+    db_sess.commit()
     return ''
 
 

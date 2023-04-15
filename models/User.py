@@ -41,7 +41,7 @@ class Student(User):
     us_class = db.Column(db.Integer(), db.ForeignKey("classes.id"),
                          nullable=False)
 
-    def __init__(self, email, password, name, last_name, shurname,
+    def __init__(self, email, password, name, last_name,
                  us_class):
         super().__init__(email, password, name, last_name)
         self.us_class = us_class
@@ -52,7 +52,7 @@ class Teacher(User):
     id = db.Column(db.Integer(), db.ForeignKey("user.id"),
                    primary_key=True)
 
-    def __init__(self, email, password, name, last_name, shurname):
+    def __init__(self, email, password, name, last_name):
         super().__init__(email, password, name, last_name)
 
 
@@ -61,8 +61,8 @@ class Librarian(User):
     id = db.Column(db.Integer(), db.ForeignKey("user.id"),
                    primary_key=True)
 
-    def __init__(self, email, password, name, last_name, shurname):
-        super().__init__(email, password, name, last_name, 1)
+    def __init__(self, email, password, name, last_name):
+        super().__init__(email, password, name, last_name)
 
 
 class Admin(User):
@@ -70,8 +70,8 @@ class Admin(User):
     id = db.Column(db.Integer(), db.ForeignKey("user.id"),
                    primary_key=True)
 
-    def __init__(self, email, password, name, last_name, shurname):
-        super().__init__(email, password, name, last_name, 1)
+    def __init__(self, email, password, name, last_name):
+        super().__init__(email, password, name, last_name)
 
 
 class ClassroomTeacher(Teacher):
@@ -81,7 +81,7 @@ class ClassroomTeacher(Teacher):
     us_class = db.Column(db.Integer(), db.ForeignKey("classes.id"),
                          nullable=False)
 
-    def __init__(self, email, password, name, last_name, shurname,
+    def __init__(self, email, password, name, last_name,
                  us_class):
-        super().__init__(email, password, name, last_name, shurname)
+        super().__init__(email, password, name, last_name)
         self.us_class = us_class
