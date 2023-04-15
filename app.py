@@ -1,8 +1,9 @@
 import hashlib
+from json import dumps
 
 from flask import Flask, render_template, request, make_response
 from flask_login import LoginManager, login_user
-from json import dumps
+
 from db_con import db_init
 
 app = Flask(__name__)
@@ -11,6 +12,8 @@ app.app_context().push()
 db = db_init(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager_admin = LoginManager()
+login_manager_admin.init_app(app)
 BASE_LIST = ['Classes', 'User']
 from models import *
 
@@ -48,7 +51,10 @@ def login_handler():
         res.headers['Content-Type'] = 'application/text'
         return res
 
-    login_user(db.session.query(User).filter_by(email=email).first().id)
+    id = db.session.query(User).filter_by(email=email).first().id
+
+    if db.session.query(Admin).filter_by()
+        login_user()
 
     return '', 200
 
@@ -61,14 +67,14 @@ def register_handler():
 @app.route('/db_req_classes', methods=['GET'])
 def db_req_handler():
     classes = db.session.query(CLasses).all()
-    # if not classes:
-    #     return '', 200
-    classes_names = dumps({'cl': [i.name for i in classes]}, ensure_ascii=False)
+    classes_names = dumps({'cl': [i.name for i in classes]},
+                          ensure_ascii=False)
     res = make_response(classes_names, 200)
     res.headers['Content-Type'] = 'application/json'
     return res
 
 
+@app.route('/login/admin')
 
 
 
