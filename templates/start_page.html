@@ -83,9 +83,7 @@
     xhr.responseType = 'json'
     xhr.send()
     xhr.onload = function() {
-        console.log(xhr.response)
         for (let j = 0; j < xhr.response['cl'].length; j++) {
-            console.log(xhr.response['cl'][j])
             let opt = document.createElement("option")
             opt.value = xhr.response['cl'][j];
             opt.innerHTML = xhr.response['cl'][j];

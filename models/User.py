@@ -11,13 +11,12 @@ class User(db.Model):
     last_name = db.Column(db.String(64), nullable=False)
     enabled = db.Column(db.Integer(), nullable=False)
 
-    def __init__(self, email, password, name, last_name, surname,
+    def __init__(self, email, password, name, last_name,
                  enabled=False):
         self.email = email
         self.password = password
         self.name = name
         self.last_name = last_name
-        self.surname = surname
         self.enabled = enabled
 
     @staticmethod
@@ -42,9 +41,9 @@ class Student(User):
     us_class = db.Column(db.Integer(), db.ForeignKey("classes.id"),
                          nullable=False)
 
-    def __init__(self, email, password, name, last_name, surname,
+    def __init__(self, email, password, name, last_name, shurname,
                  us_class):
-        super().__init__(email, password, name, last_name, surname)
+        super().__init__(email, password, name, last_name)
         self.us_class = us_class
 
 
@@ -53,8 +52,8 @@ class Teacher(User):
     id = db.Column(db.Integer(), db.ForeignKey("user.id"),
                    primary_key=True)
 
-    def __init__(self, email, password, name, last_name, surname):
-        super().__init__(email, password, name, last_name, surname)
+    def __init__(self, email, password, name, last_name, shurname):
+        super().__init__(email, password, name, last_name)
 
 
 class Librarian(User):
@@ -62,8 +61,8 @@ class Librarian(User):
     id = db.Column(db.Integer(), db.ForeignKey("user.id"),
                    primary_key=True)
 
-    def __init__(self, email, password, name, last_name, surname):
-        super().__init__(email, password, name, last_name, surname, 1)
+    def __init__(self, email, password, name, last_name, shurname):
+        super().__init__(email, password, name, last_name, 1)
 
 
 class Admin(User):
@@ -71,8 +70,8 @@ class Admin(User):
     id = db.Column(db.Integer(), db.ForeignKey("user.id"),
                    primary_key=True)
 
-    def __init__(self, email, password, name, last_name, surname):
-        super().__init__(email, password, name, last_name, surname, 1)
+    def __init__(self, email, password, name, last_name, shurname):
+        super().__init__(email, password, name, last_name, 1)
 
 
 class ClassroomTeacher(Teacher):
@@ -82,7 +81,7 @@ class ClassroomTeacher(Teacher):
     us_class = db.Column(db.Integer(), db.ForeignKey("classes.id"),
                          nullable=False)
 
-    def __init__(self, email, password, name, last_name, surname,
+    def __init__(self, email, password, name, last_name, shurname,
                  us_class):
-        super().__init__(email, password, name, last_name, surname)
+        super().__init__(email, password, name, last_name, shurname)
         self.us_class = us_class
