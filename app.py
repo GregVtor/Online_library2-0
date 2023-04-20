@@ -53,7 +53,7 @@ def login_handler():
 
     id = db.session.query(User).filter_by(email=email).first().id
 
-    if db.session.query(Admin).filter_by()
+    if db.session.query(Admin).filter_by():
         login_user()
 
     return '', 200
