@@ -24,12 +24,42 @@
      style="top: 4.6%; left: 28.8%; position: absolute; width: 42.5%; height: 9.7%; border: #202020 solid 1px; border-radius: 17px">
     <a style="font-family: 'Oswald Light'; font-size: 23px; width: 66.9%; height: 81.9%; position: absolute; top: 9.5%; left: 16.5%">Панель Администратора</a>
 </div>
-<div id="Add_teacher" style="height: 6.9%; width: 17.1%; font-family: 'Oswald Light'; position: absolute; top: 19.2%; left: 10%; border: #202231 solid 1px; border-radius: 17px">Добавить Учителя</div>
-<div id="Add_admin" style="height: 6.9%; width: 17.1%; font-family: 'Oswald Light'; position: absolute; top: 19.2%; left: 29.7%; border: #202231 solid 1px; border-radius: 17px">Добавить Админа</div>
-<div id="Add_librarian" style="height: 6.9%; width: 17.1%; font-family: 'Oswald Light'; position: absolute; top: 19.2%; left: 49.3%; border: #202231 solid 1px; border-radius: 17px">Добавить Библиотекаря</div>
-<div id="Add_homeroom_t" style="height: 6.9%; width: 17.1%; font-family: 'Oswald Light'; position: absolute; top: 19.2%; left: 71.3%; border: #202231 solid 1px; border-radius: 17px">Добавить Кл Рука</div>
+<div id="Add_teacher" style="height: 6.9%; width: 17.1%; font-family: 'Oswald Light'; position: absolute; top: 19.2%; left: 10%; border-radius: 12px; background: #0076E2; color: #FFFFFF;">Добавить Учителя</div>
+<div id="Add_admin" style="height: 6.9%; width: 17.1%; font-family: 'Oswald Light'; position: absolute; top: 19.2%; left: 29.7%; border-radius: 12px; background: #0076E2; color: #FFFFFF;">Добавить Админа</div>
+<div id="Add_librarian" style="height: 6.9%; width: 17.1%; font-family: 'Oswald Light'; position: absolute; top: 19.2%; left: 49.3%; border-radius: 12px; background: #0076E2; color: #FFFFFF;">Добавить Библиотекаря</div>
+<div id="Add_homeroom_t" style="height: 6.9%; width: 17.1%; font-family: 'Oswald Light'; position: absolute; top: 19.2%; left: 71.3%; border-radius: 12px; background: #0076E2; color: #FFFFFF;">Добавить Кл Рука</div>
+<div id="But_right" onclick="go_active()"
+     style="width: 4.8%; height: 61.6%; font-family: 'Oswald Light'; position: absolute; top: 31%; left: 91.6%; background: #0076E2; color: #FFFFFF; border-radius: 12px;">></div>
+<div id="But_left" onclick="go_not_active()"
+     style="width: 4.8%; height: 61.6%; font-family: 'Oswald Light'; position: absolute; top: 31%; left: 3.5%; background: #0076E2; color: #FFFFFF; border-radius: 12px;"><</div>
 <div id="Main_div"
      style="top: 31%; left: 10%; position: absolute; width: 79.9%; height: 61.6%; border: #202020 solid 1px; border-radius: 17px">
 </div>
 </body>
 </html>
+<script>
+    let active_or_not = 1
+    let But_left = document.getElementById("But_left")
+    let But_right = document.getElementById("But_right")
+    go_active()
+
+
+    function hide_all() {
+        But_left.hidden = true;
+        But_right.hidden = true;
+    }
+
+
+    function go_active() {
+        hide_all()
+        But_left.hidden = false;
+        active_or_not = 0;
+    }
+
+
+    function go_not_active() {
+        hide_all()
+        But_right.hidden = false;
+        active_or_not = 1
+    }
+</script>
