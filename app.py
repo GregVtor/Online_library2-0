@@ -27,10 +27,10 @@ def user_data(user):
         book_id = i.book_id
         book = db.session.query(Book).filter_by(id=book_id).first()
         name_book = book.title
-        autor = book.autor
+        author = book.author
         delta = {
             'name': name_book,
-            'autor': autor,
+            'author': author,
             'count': count,
         }
         all_books.append(delta)
@@ -48,7 +48,7 @@ def get_class_users(class_id):
         count = 0
         for j in data['all_book']:
             count += j['count']
-        ret.append([i.name, count])
+        ret.append([i.id, i.name, i.last_name, i.email, i.us_class, count])
     return ret
 
 
