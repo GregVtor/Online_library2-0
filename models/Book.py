@@ -11,9 +11,8 @@ class Book(db.Model):
     lit_type = db.Column(db.String(64), db.ForeignKey('booktypes.id'),
                          nullable=False)
 
-    def __init__(self, author, title, release_date, lit_type, user_id):
+    def __init__(self, author, title, release_date, lit_type):
         self.author = author
         self.title = title
         self.release_date = release_date
         self.lit_type = lit_type
-        self.user_id = user_id

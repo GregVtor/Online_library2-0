@@ -28,7 +28,6 @@ class History(db.Model):
         self.enable = False
         session = db.session()
         if count == self.count:
-
             count_issued = session.query(Bookshelf).filter_by(book_id=self.book_id).first().count_issued
             session.query(Bookshelf).filter_by(book_id=self.book_id).update().values(count_issued=(count_issued - count))
             session.commit()

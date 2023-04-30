@@ -48,7 +48,7 @@ def get_class_users(class_id):
         count = 0
         for j in data['all_book']:
             count += j['count']
-        ret.append([i.id, i.name, i.last_name, i.email, i.us_class, count])
+        ret.append({"id": i.id, "name": i.name, "last_name": i.last_name, "email": i.email, "us_class": i.us_class, "count": count})
     return ret
 
 
@@ -169,6 +169,18 @@ def lib_data_class():
 
 @app.route('/log')
 def log():
+    b = Book('', '', '', '')
+    bsh = Bookshelf.Bookshelf(1, 100)
+    session = db.session()
+    session.add(bsh)
+    session.commit()
+    session = db.session()
+    h = History(1, 1, 10)
+    session.add(h)
+    session.commit()
+    session = db.session()
+    m = session.query(History).filter_by(book_id=1).first()
+    m.close(2)
     logout_user()
     return ''
 
