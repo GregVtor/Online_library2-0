@@ -31,27 +31,13 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Название</th>
-                <th scope="col">Автор</th>
-                <th scope="col">Количество</th>
+                <th scope="col">ФИ</th>
+                <th scope="col">Кол-во книг</th>
+                <th scope="col">Класс</th>
               </tr>
             </thead>
             <tbody id="tb">
-              {% for c, i, j, n, id, mark, u in book %}
-                <tr>
-                  <th scope="row" style="color: white">{{ c }}</th>
-                  <td style="color: white">{{ i }}</td>
-                  <td style="color: white">{{ j }}</td>
-                  <td style="color: white">{{ n }}</td>
-                  {% if mark %}
-                  <td>
-                      <form action="/main" method="post">
-                        <button type="submit" name="diz" value='{{id}} {{u}}'>Сдать</button>
-                      </form>
-                  </td>
-                  {% endif %}
-                </tr>
-              {% endfor %}
+
             </tbody>
           </table>
           {% if mat %}
@@ -77,13 +63,13 @@
                     x.style.borderRadius = '5px';
                     let id = xhr.response[i][0];
                     x.onclick = function delt (){
-                        let xhr = new XMLHttpRequest();
-                        xhr.open('POST', '/lib_data_class');
-                        xhr.responseType = 'json'
-                        xhr.setRequestHeader('Content-Type', 'application/json');
-                        xhr.send(JSON.stringify({id: id}));
-                        xhr.onload = function() {
-                            console.log(xhr.response)
+                        let xhr_1 = new XMLHttpRequest();
+                        xhr_1.open('POST', '/lib_data_class');
+                        xhr_1.responseType = 'json'
+                        xhr_1.setRequestHeader('Content-Type', 'application/json');
+                        xhr_1.send(JSON.stringify({id: id}));
+                        xhr_1.onload = function() {
+                            console.log(xhr_1.response)
                         }
                     }
                     document.getElementById('classes').appendChild(x);

@@ -51,32 +51,59 @@
 <div id="Table_active"
      style="top: 40.7%; left: 12%; position: absolute; width: 79.9%; height: 61.6%">
     <table>
+            <thead>
+                <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Class</th>
+                <th>Activate</th>
+                </tr>
+            </thead>
         <tbody>
-        <tr>
-            <td>ID;</td>
-            <td>name;</td>
-            <td>surname;</td>
-            <td>email;</td>
-            <td>class;</td>
-            <td>activate;</td>
-        </tr>
+          {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.class }}</td>
+                <td>{{ user.activate }}</td>
+            </tr>
+          {% endfor %}
         </tbody>
     </table>
 </div>
 <div id="Table_not_active"
      style="top: 40.7%; left: 12%; position: absolute; width: 79.9%; height: 61.6%">
     <table>
+            <thead>
+                <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Class</th>
+                <th>Type</th>
+                </tr>
+            </thead>
         <tbody>
-        <tr>
-            <td>ID;</td>
-            <td>name;</td>
-            <td>surname;</td>
-            <td>email;</td>
-            <td>class;</td>
-            <td>type;</td>
-        </tr>
+          {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.class }}</td>
+                <td>{{ user.type }}</td>
+            </tr>
+          {% endfor %}
         </tbody>
     </table>
+</div>
+<div>
+
 </div>
 <div id="Main_div"
      style="top: 31%; left: 10%; position: absolute; width: 79.9%; height: 61.6%; border: #202020 solid 1px; border-radius: 17px">
