@@ -24,16 +24,4 @@ class History(db.Model):
         session.query(Bookshelf).filter_by(book_id=book_id).update().values(count_issued=(count_issued + count))
         session.commit()
 
-    def close(self, count):
-        self.enable = False
-        session = db.session()
-        if count == self.count:
 
-            count_issued = session.query(Bookshelf).filter_by(book_id=self.book_id).first().count_issued
-            session.query(Bookshelf).filter_by(book_id=self.book_id).update().values(count_issued=(count_issued - count))
-            session.commit()
-        else:
-            count_issued = session.query(Bookshelf).filter_by(book_id=self.book_id).first().count_issued
-            session.query(Bookshelf).filter_by(book_id=self.book_id).update().values(count_issued=(count_issued - count))
-            self.count -= count
-            session.commit()

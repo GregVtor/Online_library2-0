@@ -15,7 +15,20 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 BASE_LIST = ['Classes', 'User']
 app.secret_key = ';'
-from models import *
+
+from models import Admin, User, Student, Librarian, History, Book, Bookshelf, Teacher, CLasses
+
+
+def close(self, count):
+    session = db.session()
+    count_issued = session.query(Bookshelf).filter_by(book=self.book_id).first().count_issued
+    if count == self.count:
+        self.enable = False
+        session.commit()
+    else:
+        session.query(Bookshelf).filter_by(book=self.book_id).update({'count_issued': count_issued - count})
+        self.count -= count
+        session.commit()
 
 
 def user_data(user):
@@ -27,10 +40,10 @@ def user_data(user):
         book_id = i.book_id
         book = db.session.query(Book).filter_by(id=book_id).first()
         name_book = book.title
-        autor = book.autor
+        author = book.author
         delta = {
             'name': name_book,
-            'autor': autor,
+            'author': author,
             'count': count,
         }
         all_books.append(delta)
@@ -48,7 +61,7 @@ def get_class_users(class_id):
         count = 0
         for j in data['all_book']:
             count += j['count']
-        ret.append([i.name, count])
+        ret.append([i.id, i.name, i.last_name, i.us_class, count])
     return ret
 
 
@@ -149,10 +162,10 @@ def stu_d():
 
 
 @app.route('/lib', methods=['GET'])
-# @login_required
+@login_required
 def lib():
-    # if not isinstance(current_user, Librarian):
-    #     return '', 401
+    if not isinstance(current_user, Librarian):
+        return '', 401
     session = db.session()
     classes_list = [i.name for i in session.query(CLasses).all()]
     return render_template('librarian.html')
@@ -169,6 +182,10 @@ def lib_data_class():
 
 @app.route('/log')
 def log():
+    session = db.session()
+    m = session.query(History).filter_by(book_id=1).first()
+    close(m, 5)
+    session.close()
     logout_user()
     return ''
 

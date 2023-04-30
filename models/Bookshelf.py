@@ -11,7 +11,8 @@ class Bookshelf(db.Model):
     count_issued = db.Column(db.Integer(), nullable=False)
     isbn = db.Column(db.String(17), nullable=False)
 
-    def __init__(self, book, count_all):
+    def __init__(self, book, count_all, isbn):
         self.book = book
         self.count_all = count_all
         self.count_issued = 0
+        self.isbn = isbn
