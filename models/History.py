@@ -1,6 +1,7 @@
+from datetime import datetime
+
 from db_con import db
 from . import Bookshelf
-from datetime import datetime
 
 
 class History(db.Model):
@@ -20,8 +21,8 @@ class History(db.Model):
         self.count = count
         self.data = str(datetime.now())
         session = db.session()
-        count_issued = session.query(Bookshelf).filter_by(book_id=book_id).first().count_issued
-        session.query(Bookshelf).filter_by(book_id=book_id).update().values(count_issued=(count_issued + count))
+        count_issued = session.query(Bookshelf).filter_by(
+            book_id=book_id).first().count_issued
+        session.query(Bookshelf).filter_by(book_id=book_id).update().values(
+            count_issued=(count_issued + count))
         session.commit()
-
-

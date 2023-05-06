@@ -10,7 +10,8 @@ class User(db.Model):
     name = db.Column(db.String(64), nullable=False)
     last_name = db.Column(db.String(64), nullable=False)
     enabled = db.Column(db.Integer(), nullable=False)
-
+    # if not isinstance(current_user, Librarian):
+    #     return '', 401
     def __init__(self, email, password, name, last_name,
                  enabled=False):
         self.email = email
