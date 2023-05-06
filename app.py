@@ -167,10 +167,10 @@ def stu_d():
 
 
 @app.route('/lib', methods=['GET'])
-# @login_required
+@login_required
 def lib():
-    # if not isinstance(current_user, Librarian):
-    #     return '', 401
+    if not isinstance(current_user, Librarian):
+        return '', 401
     session = db.session()
     classes_list = [i.name for i in session.query(CLasses).all()]
     return render_template('librarian.html')
@@ -192,5 +192,4 @@ def log():
 
 
 if __name__ == '__main__':
-    get_class_users(1)
     app.run(debug=True)
