@@ -2,8 +2,8 @@ import hashlib
 from json import dumps, loads
 
 from flask import Flask, render_template, request, make_response
-from flask_login import LoginManager, login_user, login_required, current_user, \
-    logout_user
+from flask_login import LoginManager, login_user, login_required, \
+    current_user, logout_user
 
 from db_con import db_init
 
@@ -16,17 +16,20 @@ login_manager.init_app(app)
 BASE_LIST = ['Classes', 'User']
 app.secret_key = ';'
 
-from models import Admin, User, Student, Librarian, History, Book, Bookshelf, Teacher, CLasses
+from models import Admin, User, Student, Librarian, History, Book, \
+    Bookshelf, Teacher, CLasses
 
 
 def close(self, count):
     session = db.session()
-    count_issued = session.query(Bookshelf).filter_by(book=self.book_id).first().count_issued
+    count_issued = session.query(Bookshelf).filter_by(
+        book=self.book_id).first().count_issued
     if count == self.count:
         self.enable = False
         session.commit()
     else:
-        session.query(Bookshelf).filter_by(book=self.book_id).update({'count_issued': count_issued - count})
+        session.query(Bookshelf).filter_by(book=self.book_id).update(
+            {'count_issued': count_issued - count})
         self.count -= count
         session.commit()
 
@@ -47,7 +50,8 @@ def user_data(user):
             'count': count,
         }
         all_books.append(delta)
-    ret = dumps({'us_name': user.name + ' ' + user.last_name, 'us_class': user.us_class,
+    ret = dumps({'us_name': user.name + ' ' + user.last_name,
+                 'us_class': user.us_class,
                  'all_book': all_books})
     return ret
 
@@ -162,12 +166,10 @@ def stu_d():
 
 
 @app.route('/lib', methods=['GET'])
-# @login_required
+@login_required
 def lib():
-    # if not isinstance(current_user, Librarian):
-    #     return '', 401
-    session = db.session()
-    classes_list = [i.name for i in session.query(CLasses).all()]
+    if not isinstance(current_user, Librarian):
+        return '', 401
     return render_template('librarian.html')
 
 
