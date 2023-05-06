@@ -69,7 +69,11 @@
                         xhr_1.setRequestHeader('Content-Type', 'application/json');
                         xhr_1.send(JSON.stringify({id: id}));
                         xhr_1.onload = function() {
-                            console.log(xhr_1.response)
+                             for (let i = 0; i < xhr_1.response.length; i++) {
+                                let n = document.createElement('tr')
+                                let m = document.createElement('th')
+                                th.innerHTML = xhr_1.response[i].
+                      }
                         }
                     }
                     document.getElementById('classes').appendChild(x);

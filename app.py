@@ -65,7 +65,8 @@ def get_class_users(class_id):
         count = 0
         for j in data['all_book']:
             count += j['count']
-        ret.append([i.id, i.name, i.last_name, i.email, i.us_class, count])
+        ret.append({"id": i.id, "name": i.name, "last_name": i.last_name,
+                    "email": i.email, "us_class": i.us_class, "count": count})
     return ret
 
 
@@ -166,10 +167,12 @@ def stu_d():
 
 
 @app.route('/lib', methods=['GET'])
-@login_required
+# @login_required
 def lib():
-    if not isinstance(current_user, Librarian):
-        return '', 401
+    # if not isinstance(current_user, Librarian):
+    #     return '', 401
+    session = db.session()
+    classes_list = [i.name for i in session.query(CLasses).all()]
     return render_template('librarian.html')
 
 
@@ -184,10 +187,6 @@ def lib_data_class():
 
 @app.route('/log')
 def log():
-    session = db.session()
-    m = session.query(History).filter_by(book_id=1).first()
-    close(m, 5)
-    session.close()
     logout_user()
     return ''
 
